@@ -53,10 +53,16 @@ jobs:
           IMAGE_NAME=us-central1-docker.pkg.dev/learninggcp-450807/my-app-repo/app-cicd:latest
           docker push $IMAGE_NAME
 
-      - name: deploy to cloud run
-        run: |
-          gcloud run deploy cloudrun-app \
-          --image=us-central1-docker.pkg.dev/learninggcp-450807/my-app-repo/app-cicd:latest \
-          --region=us-central1 \
-          --platform=managed \
-          --allow-unauthenticated
+      # - name: deploy to cloud run
+      #   run: |
+      #     gcloud run deploy cloudrun-app \
+      #     --image=us-central1-docker.pkg.dev/learninggcp-450807/my-app-repo/app-cicd:latest \
+      #     --region=us-central1 \
+      #     --platform=managed \
+      #     --allow-unauthenticated
+      - name: Deploy to Cloud Run
+        uses: google-github-actions/deploy-cloudrun@v1
+        with:
+          image: us-central1-docker.pkg.dev/learninggcp-450807/my-app-repo/app-cicd:latest
+          service: "cloudrun-app"
+          region: us-central1
