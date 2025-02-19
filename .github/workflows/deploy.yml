@@ -43,12 +43,12 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          IMAGE_NAME=us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-app-repo/app-cicd:latest
+          IMAGE_NAME=us-central1-docker.pkg.dev/learninggcp-450807/my-app-repo/app-cicd:latest
           docker build -t $IMAGE_NAME .
 
       - name: Push Docker Image
         run: |
-          IMAGE_NAME=us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-app-repo/app-cicd:latest
+          IMAGE_NAME=us-central1-docker.pkg.dev/learninggcp-450807/my-app-repo/app-cicd:latest
           docker push $IMAGE_NAME
 
       # - name: Deploy to Cloud Run
