@@ -42,7 +42,7 @@ jobs:
       #     gcloud builds submit --tag gcr.io/${{ secrets.GCP_PROJECT_ID }}/my-app
       - name: Configure Docker Authentication
         run: gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
-        
+
       - name: Build Docker Image
         run: |
           IMAGE_NAME=us-central1-docker.pkg.dev/learninggcp-450807/my-app-repo/app-cicd:latest
@@ -53,10 +53,10 @@ jobs:
           IMAGE_NAME=us-central1-docker.pkg.dev/learninggcp-450807/my-app-repo/app-cicd:latest
           docker push $IMAGE_NAME
 
-      # - name: Deploy to Cloud Run
-      #   run: |
-      #     gcloud run deploy my-app \
-      #       --image=gcr.io/${{ secrets.GCP_PROJECT_ID }}/my-app \
-      #       --platform=managed \
-      #       --region=us-central1 \
-      #       --allow-unauthenticated
+       - name: Deploy to Cloud Run
+         run: |
+           gcloud run deploy my-app \
+             --image=gcr.io/${{ secrets.GCP_PROJECT_ID }}/my-app-repo/app-cicd:latest \
+             --platform=managed \
+             --region=us-central1 \
+             --allow-unauthenticated
